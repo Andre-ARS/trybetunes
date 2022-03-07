@@ -41,11 +41,13 @@ class Login extends Component {
   }
 
   render() {
-    const { state: { btnDisable, name, loading, status }, onInputChange, addUser } = this;
+    const { state: {
+      btnDisable,
+      name,
+      loading,
+      status }, onInputChange, addUser } = this;
 
-    if (loading) {
-      return <Loading status={ status } />;
-    }
+    if (loading) return <Loading status={ status } redirect="/search" />;
 
     return (
       <div data-testid="page-login">
