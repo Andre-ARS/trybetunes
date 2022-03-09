@@ -16,6 +16,10 @@ class MusicCard extends Component {
       this.setState({
         isChecked: true,
       });
+    } else {
+      this.setState({
+        isChecked: false,
+      });
     }
   }
 

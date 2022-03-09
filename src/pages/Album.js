@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import getMusics from '../services/musicsAPI';
 import Loading from './Loading';
 
@@ -18,6 +18,7 @@ class Album extends Component {
     this.musicFetch = this.musicFetch.bind(this);
     this.renderTracks = this.renderTracks.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.fetchFav = this.fetchFav.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +26,20 @@ class Album extends Component {
     this.fetchFav();
   }
 
-  onInputChange({ target: { name } }) {
+  onInputChange({ target }) {
+    const { name, checked } = target;
     this.setState({ loading: true }, async () => {
       const { trackList } = this.state;
-      await addSong(trackList[name]);
 
+      if (!checked) {
+        await removeSong(trackList[name]);
+      } else {
+        await addSong(trackList[name]);
+      }
       this.setState({
         loading: false,
         favSongs: JSON.parse(localStorage.getItem('favorite_songs')),
       });
-
-      this.fetchFav = this.fetchFav.bind(this);
     });
   }
 
