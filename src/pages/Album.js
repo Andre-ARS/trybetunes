@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
+import { addSong } from '../services/favoriteSongsAPI';
 import getMusics from '../services/musicsAPI';
+import Loading from './Loading';
 
 class Album extends Component {
   constructor(props) {
@@ -10,14 +12,28 @@ class Album extends Component {
 
     this.state = {
       artistName: '',
+      favSongs: JSON.parse(localStorage.getItem('favorite_songs')),
     };
 
     this.musicFetch = this.musicFetch.bind(this);
     this.renderTracks = this.renderTracks.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   componentDidMount() {
     this.musicFetch();
+  }
+
+  onInputChange({ target: { name } }) {
+    this.setState({ loading: true }, async () => {
+      const { trackList } = this.state;
+      await addSong(trackList[name]);
+
+      this.setState({
+        loading: false,
+        favSongs: JSON.parse(localStorage.getItem('favorite_songs')),
+      });
+    });
   }
 
   async musicFetch() {
@@ -33,7 +49,7 @@ class Album extends Component {
   }
 
   renderTracks() {
-    const { trackList } = this.state;
+    const { state: { trackList, favSongs }, onInputChange } = this;
 
     if (trackList) {
       return (trackList
@@ -44,13 +60,16 @@ class Album extends Component {
             id={ trackId }
             url={ previewUrl }
             key={ trackName }
+            event={ onInputChange }
+            index={ index }
+            favSongs={ favSongs }
           />))
       );
     }
   }
 
   render() {
-    const { state: { artistName, albumName, album } } = this;
+    const { state: { artistName, albumName, album, loading } } = this;
 
     return (
       <div data-testid="page-album">
@@ -61,7 +80,7 @@ class Album extends Component {
           <h3 data-testid="artist-name">{artistName}</h3>
         </div>
         <div>
-          {this.renderTracks()}
+          {loading ? <Loading /> : this.renderTracks()}
         </div>
       </div>
     );
