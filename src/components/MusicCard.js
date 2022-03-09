@@ -4,7 +4,6 @@ import PropTypes, { string } from 'prop-types';
 class MusicCard extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isChecked: false,
     };
