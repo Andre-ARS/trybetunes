@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from './Loading';
@@ -171,5 +172,13 @@ class ProfileEdit extends Component {
     );
   }
 }
+
+ProfileEdit.defaultProps = {
+  history: undefined,
+};
+
+ProfileEdit.propTypes = {
+  history: PropTypes.shape(),
+};
 
 export default ProfileEdit;
