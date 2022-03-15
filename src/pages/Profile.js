@@ -30,34 +30,35 @@ class Profile extends Component {
     });
   }
 
-  render() {
-    const { profile, loading } = this.state;
+  renderProfileInfo = () => {
+    const { profile } = this.state;
     const { name, image, description, email } = profile;
+    const buttonText = 'Editar perfil';
+    return (
+      <section>
+        <img src={ image } alt={ name } data-testid="profile-image" />
+        <p>{name}</p>
+        <p>{email}</p>
+        <p>{ description }</p>
+        <Link to="/profile/edit">
+          <button type="button">
+            { buttonText }
+          </button>
+        </Link>
+      </section>
+    );
+  }
+
+  render() {
+    const { loading } = this.state;
 
     return (
       <div data-testid="page-profile">
         <Header />
+        <p>Editar perfil</p>
         { loading ? <Loading />
           : (
-            <section>
-              <img src={ image } alt={ name } data-testid="profile-image" />
-              <Link to="/profile/edit">Editar perfil</Link>
-              <p>
-                Nome
-                <br />
-                <span>{name}</span>
-              </p>
-              <p>
-                E-mail
-                <br />
-                <span>{ email }</span>
-              </p>
-              <p>
-                Descrição
-                <br />
-                <span>{ description }</span>
-              </p>
-            </section>
+            this.renderProfileInfo()
           ) }
       </div>
     );
