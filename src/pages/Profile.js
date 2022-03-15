@@ -33,18 +33,17 @@ class Profile extends Component {
   renderProfileInfo = () => {
     const { profile } = this.state;
     const { name, image, description, email } = profile;
-    const buttonText = 'Editar perfil';
     return (
       <section>
         <img src={ image } alt={ name } data-testid="profile-image" />
+        <Link to="/profile/edit">
+          <button type="button">
+            Editar perfil
+          </button>
+        </Link>
         <p>{name}</p>
         <p>{email}</p>
         <p>{ description }</p>
-        <Link to="/profile/edit">
-          <button type="button">
-            { buttonText }
-          </button>
-        </Link>
       </section>
     );
   }
@@ -55,7 +54,6 @@ class Profile extends Component {
     return (
       <div data-testid="page-profile">
         <Header />
-        <p>Editar perfil</p>
         { loading ? <Loading />
           : (
             this.renderProfileInfo()
