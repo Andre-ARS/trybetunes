@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../components/Header/index';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -17,6 +17,19 @@ class Profile extends Component {
 
   componentDidMount() {
     this.fetchUser();
+    this.handlePageSelector();
+  }
+
+  componentWillUnmount() {
+    const profile = document.querySelectorAll('a')[2];
+    profile.style.color = '#fffffe';
+  }
+
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const profile = document.querySelectorAll('a')[2];
+    pageSelector.style.left = '292px';
+    profile.style.color = '#16161A';
   }
 
   fetchUser() {
@@ -52,7 +65,7 @@ class Profile extends Component {
     const { loading } = this.state;
 
     return (
-      <div data-testid="page-profile">
+      <div data-testid="page-profile" className="profile">
         <Header />
         { loading ? <Loading />
           : (

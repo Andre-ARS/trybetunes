@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from './Loading';
+import Header from '../../components/Header/index';
+import searchAlbumsAPI from '../../services/searchAlbumsAPI';
+import Loading from '../Loading';
+import style from './style.module.css';
 
 class Search extends Component {
   constructor(props) {
@@ -16,6 +17,22 @@ class Search extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.fetchArtist = this.fetchArtist.bind(this);
     this.albumRender = this.albumRender.bind(this);
+  }
+
+  componentDidMount() {
+    this.handlePageSelector();
+  }
+
+  componentWillUnmount() {
+    const search = document.querySelectorAll('a')[0];
+    search.style.color = '#fffffe';
+  }
+
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const search = document.querySelectorAll('a')[0];
+    pageSelector.style.left = '0';
+    search.style.color = '#16161A';
   }
 
   onInputChange({ target }) {
@@ -76,9 +93,9 @@ class Search extends Component {
       onInputChange, fetchArtist, albumRender } = this;
 
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="search">
         <Header />
-        <form className="SearchBar">
+        <form className="search-bar">
           <input
             type="text"
             data-testid="search-artist-input"

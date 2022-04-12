@@ -1,0 +1,121 @@
+.container {
+  background-color: var(--tertiary-color);
+  border-top: 7px solid var(--secondary-color);
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.header__user {
+  align-items: center;
+  align-self: center;
+  background-color: var(--secondary-color);
+  border-radius: 100px;
+  color: var(--main-color);
+  display: flex;
+  font-weight: 500;
+  height: 32px;
+  justify-content: center;
+  padding: 5px;
+  position: relative;
+  width: 148px;
+}
+
+.header__user img {
+  border-radius: 100%;
+  height: 30px;
+  left: 6px;
+  position: absolute;
+  width: 30px;
+  z-index: 10;
+}
+
+.header__navigation {
+  background-color: rgb(39, 38, 38);
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  width: 440px;
+}
+
+.header__navigation a {
+  align-self: flex-start;
+  color: var();
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 200ms ease-in-out;
+  width: 33%;
+  z-index: 200;
+}
+
+.select__page {
+  display: flex;
+  left: 0; /* search: left 0; favorites: left 145px; profile: left 292; */
+  position: absolute;
+  z-index: 1;
+}
+
+/* a:nth-child( 1 ) {
+  color: var(--main-color);
+} */
+
+.page__change {
+  background-color: var(--secondary-color);
+  border-radius: 0 0 10px 10px;
+  height: 28px;
+  position: relative;
+  text-align: center;
+  width: 104px;
+}
+
+.left__square {
+  background-color: var(--secondary-color);
+  height: 19px;
+  width: 22px;
+}
+
+.right__square {
+  background-color: var(--secondary-color);
+  height: 19px;
+  width: 22px;
+}
+
+.page__change::before {
+  background-color: var(--tertiary-color);
+  border-radius: 20px;
+  content: '';
+  height: 30px;
+  left: -40px;
+  position: absolute;
+  top: -0.2px;
+  width: 40px;
+}
+
+.page__change::after {
+  background-color: var(--tertiary-color);
+  border-radius: 20px;
+  content: '';
+  height: 30px;
+  left: 104.4px;
+  position: absolute;
+  top: -0.2px;
+  width: 40px;
+}
+
+.profile__page {
+  visibility: hidden;
+}
+
+.fav a:nth-child( 2 ) {
+  background-color: rgb(236, 232, 232);
+  color: black;
+}
+
+.profile .header-navigation a:nth-child( 3 ) {
+  background-color: rgb(236, 232, 232);
+  color: black;
+}
+

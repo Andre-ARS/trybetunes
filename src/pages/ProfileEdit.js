@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../components/Header/index';
 import Loading from './Loading';
 import { getUser, updateUser } from '../services/userAPI';
 
@@ -27,38 +27,54 @@ class ProfileEdit extends Component {
 
   componentDidMount() {
     this.fetchUser();
+    this.handlePageSelector();
+  }
+
+  componentWillUnmount() {
+    const profile = document.querySelectorAll('a')[2];
+    profile.style.color = '#fffffe';
+  }
+
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const profile = document.querySelectorAll('a')[2];
+    pageSelector.style.left = '292px';
+    profile.style.color = '#16161A';
   }
 
   onInputChange({ target: { name, value } }) {
-    this.setState({
-      [name]: value,
-    }, () => this.saveValidation());
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => this.saveValidation(),
+    );
   }
 
   setValue() {
     const { profile } = this.state;
     const { name, image, description, email } = profile;
 
-    this.setState({
-      name,
-      image,
-      description,
-      email,
-    });
+    this.setState(
+      {
+        name,
+        image,
+        description,
+        email,
+      },
+      () => this.saveValidation(),
+    );
   }
 
   editForm = () => {
-    const { state: {
-      disable,
-      name,
-      image,
-      description,
-      email,
-      redirect }, onInputChange, saveUser } = this;
+    const {
+      state: { disable, name, image, description, email, redirect },
+      onInputChange,
+      saveUser,
+    } = this;
 
     return (
       <div>
-
         <form>
           <label htmlFor="image">
             <input
@@ -110,14 +126,13 @@ class ProfileEdit extends Component {
             type="button"
             onClick={ saveUser }
           >
-            Editar perfil
-
+            Salvar
           </button>
         </form>
-        { redirect && <Redirect to="/profile" /> }
+        {redirect && <Redirect to="/profile" />}
       </div>
     );
-  }
+  };
 
   saveValidation() {
     const { name, image, description, email } = this.state;
@@ -137,37 +152,38 @@ class ProfileEdit extends Component {
     this.setState({ loading: true }, async () => {
       const userData = await getUser();
 
-      this.setState({
-        profile: userData,
-        loading: false,
-      }, () => this.setValue());
+      this.setState(
+        {
+          profile: userData,
+          loading: false,
+        },
+        () => this.setValue(),
+      );
     });
   }
 
   async saveUser() {
     const { name, image, description, email } = this.state;
-    const { history: { push } } = this.props;
+    const {
+      history: { push },
+    } = this.props;
     const profileData = {
       name,
       image,
       description,
       email,
     };
-    await updateUser(profileData);
-
     push('/profile');
+    await updateUser(profileData);
   }
 
   render() {
     const { loading } = this.state;
 
     return (
-      <div data-testid="page-profile-edit">
+      <div data-testid="page-profile-edit" className="profile">
         <Header />
-        {(loading) ? <Loading />
-          : (
-            this.editForm()
-          )}
+        {loading ? <Loading /> : this.editForm()}
       </div>
     );
   }

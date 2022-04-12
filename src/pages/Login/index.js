@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { createUser } from '../services/userAPI';
-import Loading from './Loading';
+import { BsPerson } from 'react-icons/bs';
+import { createUser } from '../../services/userAPI';
+import Loading from '../Loading';
+import styles from './style.module.css';
+import playerDraw from '../../images/audio__player.svg';
 
 class Login extends Component {
   constructor(props) {
@@ -50,15 +53,20 @@ class Login extends Component {
     if (loading) return <Loading status={ status } redirect="/search" />;
 
     return (
-      <div data-testid="page-login">
-        <form>
+      <div data-testid="page-login" className={ styles.container }>
+        <img src={ playerDraw } alt="" />
+        <form className={ styles.login__form }>
+          <h1>LogIn</h1>
+          <BsPerson className={ styles.person } />
           <input
             type="text"
             data-testid="login-name-input"
             name="name"
             id="nameInput"
+            placeholder="Nome"
             value={ name }
             onChange={ onInputChange }
+            className={ styles.input }
           />
           <button
             disabled={ btnDisable }
