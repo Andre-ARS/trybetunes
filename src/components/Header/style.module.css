@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-element-colon-notation */
 .container {
   background-color: var(--tertiary-color);
   border-top: 7px solid var(--secondary-color);
@@ -5,6 +6,7 @@
   height: 64px;
   justify-content: space-between;
   margin-bottom: 30px;
+  padding-right: 20px;
   width: 100%;
 }
 
@@ -23,8 +25,10 @@
   width: 148px;
 }
 
-.header__user img {
+.header__user img, .header__user p {
   border-radius: 100%;
+  color: var(--accent);
+  font-size: 30px;
   height: 30px;
   left: 6px;
   position: absolute;
@@ -55,12 +59,9 @@
   display: flex;
   left: 0; /* search: left 0; favorites: left 145px; profile: left 292; */
   position: absolute;
+  top: 6.5px;
   z-index: 1;
 }
-
-/* a:nth-child( 1 ) {
-  color: var(--main-color);
-} */
 
 .page__change {
   background-color: var(--secondary-color);
@@ -87,7 +88,7 @@
   background-color: var(--tertiary-color);
   border-radius: 20px;
   content: '';
-  height: 30px;
+  height: 31.5px;
   left: -40px;
   position: absolute;
   top: -0.2px;
@@ -98,24 +99,9 @@
   background-color: var(--tertiary-color);
   border-radius: 20px;
   content: '';
-  height: 30px;
-  left: 104.4px;
+  height: 31.5px;
+  left: 104px;
   position: absolute;
   top: -0.2px;
   width: 40px;
 }
-
-.profile__page {
-  visibility: hidden;
-}
-
-.fav a:nth-child( 2 ) {
-  background-color: rgb(236, 232, 232);
-  color: black;
-}
-
-.profile .header-navigation a:nth-child( 3 ) {
-  background-color: rgb(236, 232, 232);
-  color: black;
-}
-

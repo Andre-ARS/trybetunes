@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { IoMdContact } from 'react-icons/io';
 import Loading from '../../pages/Loading';
 import { getUser } from '../../services/userAPI';
 // import logo from '../../images/Logo_TrybeTunes.png';
@@ -49,7 +50,9 @@ class Header extends Component {
           userName
             ? (
               <div className={ style.header__user }>
-                <img src={ image } alt="" />
+                { image
+                  ? <img src={ image } alt="" />
+                  : <p><IoMdContact /></p>}
                 <span data-testid="header-user-name">{userName}</span>
               </div>
             )

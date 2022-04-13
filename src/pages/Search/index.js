@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
 import Header from '../../components/Header/index';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import Loading from '../Loading';
 import style from './style.module.css';
 
+const ALBUM_LIMIT = 17;
+const ALBUM_LAST_INDEX = 13;
+const ARTIST_LIMIT = 13;
+const ARTIST_LAST_INDEX = 9;
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -66,21 +71,36 @@ class Search extends Component {
 
     if (Array.isArray(albuns)) {
       const albumList = albuns
-        .map(({ artistName, collectionId, collectionName, artworkUrl100 }) => (
-          <Link
-            to={ `/album/${collectionId}` }
-            data-testid={ `link-to-album-${collectionId}` }
-            key={ collectionId }
-          >
-            <img src={ artworkUrl100 } alt={ collectionName } />
-            <h3>{ collectionName }</h3>
-            <h4>{ artistName }</h4>
-          </Link>
-        ));
+        .map(({ artistName, collectionId, collectionName, artworkUrl100 }) => {
+          const albumName = collectionName.length <= ALBUM_LIMIT
+            ? collectionName
+            : collectionName.slice(0, ALBUM_LAST_INDEX).concat('...');
+          const artists = artistName.length <= ARTIST_LIMIT
+            ? artistName
+            : artistName.slice(0, ARTIST_LAST_INDEX).concat('...');
+          return (
+            <Link
+              to={ `/album/${collectionId}` }
+              data-testid={ `link-to-album-${collectionId}` }
+              key={ collectionId }
+              className={ style.album__warapper }
+            >
+              <img src={ artworkUrl100 } alt={ collectionName } />
+              <h3>{ albumName }</h3>
+              <h4>{ artists }</h4>
+            </Link>
+          );
+        });
       return (
         <>
-          <h2>{ `Resultado de álbuns de: ${artist}` }</h2>
-          {albumList}
+          <h2
+            className={ style.result__text }
+          >
+            { `Resultado de álbuns de: ${artist}` }
+          </h2>
+          <div className={ style.track__list }>
+            {albumList}
+          </div>
         </>
       );
     }
@@ -93,9 +113,9 @@ class Search extends Component {
       onInputChange, fetchArtist, albumRender } = this;
 
     return (
-      <div data-testid="page-search" className="search">
+      <div data-testid="page-search" className={ style.search__page }>
         <Header />
-        <form className="search-bar">
+        <form className={ style.search__bar }>
           <input
             type="text"
             data-testid="search-artist-input"
@@ -109,7 +129,7 @@ class Search extends Component {
             data-testid="search-artist-button"
             onClick={ fetchArtist }
           >
-            Pesquisar
+            <AiOutlineSearch />
           </button>
         </form>
         {albumRender()}

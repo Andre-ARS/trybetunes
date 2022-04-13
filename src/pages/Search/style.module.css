@@ -1,17 +1,20 @@
-/* .search {
-  background-color: rgb(14, 13, 13);
+.search__page {
+  background-color: var(--main-color);
   height: 100vh;
-} */
+}
 
-/* .search-bar {
+.search__bar {
   align-items: center;
   display: flex;
+  height: 29px;
   justify-content: space-around;
   margin: auto;
+  position: relative;
   width: 40%;
 }
 
-.search-bar input {
+.search__bar input {
+  background-color: var(--secondary-color);
   border: none;
   border-radius: 20px;
   font-size: 18px;
@@ -19,23 +22,77 @@
   width: 100%;
 }
 
-.search-bar button {
-  background-color: rgb(8, 92, 8);
+.search__bar button {
+  background-color: rgba(255, 255, 255, 0);
   border: none;
   border-radius: 20px;
-  color: white;
-  font-size: 18px;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 28px;
   font-weight: 500;
-  left: 65%;
   padding: 7px;
   position: absolute;
+  right: 5px;
 }
 
-.search-bar button:hover {
-  background-color: green;
+.result__text {
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 400;
+  margin: 57px 36px;
 }
 
-.search-bar button:disabled {
-  background-color: rgb(47, 65, 47);
-  color: rgb(199, 194, 194);
-} */
+.album__warapper {
+  align-items: center;
+  background-color: var(--tertiary-color);
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin-bottom: 40px;
+  text-align: center;
+  text-decoration: none;
+  width: 144px;
+}
+
+.album__warapper img {
+  border-radius: 5px;
+  height: 110px;
+  margin-bottom: 18px;
+  width: 114px;
+}
+
+.album__warapper h3 {
+  color: var(--secondary-color);
+  font-size: 12px;
+}
+
+.album__warapper h4 {
+  color: #7a7a7a;
+  font-size: 12px;
+}
+
+.track__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  height: 500px;
+  margin: auto;
+  overflow-y: scroll;
+  padding: 12px;
+  width: 80%;
+}
+
+::-webkit-scrollbar {
+  margin-left: 30px;
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(53, 53, 54, 0.233);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+}
