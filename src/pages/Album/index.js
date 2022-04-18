@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Header from '../components/Header/index';
-import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
-import getMusics from '../services/musicsAPI';
-import Loading from './Loading';
+import Header from '../../components/Header/index';
+import MusicCard from '../../components/MusicCard/index';
+import { addSong, getFavoriteSongs, removeSong } from '../../services/favoriteSongsAPI';
+import getMusics from '../../services/musicsAPI';
+import Loading from '../Loading';
+import style from './style.module.css';
 
 class Album extends Component {
   constructor(props) {
@@ -98,17 +99,19 @@ class Album extends Component {
     const { state: { artistName, albumName, album, loading } } = this;
 
     return (
-      <div data-testid="page-album">
+      <main data-testid="page-album" className={ style.album__page }>
         <Header />
-        <div>
-          <img src={ album } alt="" />
-          <h2 data-testid="album-name">{albumName}</h2>
-          <h3 data-testid="artist-name">{artistName}</h3>
-        </div>
-        <div>
-          {loading ? <Loading /> : this.renderTracks()}
-        </div>
-      </div>
+        <section className={ style.album__container }>
+          <div className={ style.album__info }>
+            <img src={ album } alt={ albumName } />
+            <h2 data-testid="album-name">{albumName}</h2>
+            <h3 data-testid="artist-name">{artistName}</h3>
+          </div>
+          <div className={ style.track__list }>
+            {loading ? <Loading /> : this.renderTracks()}
+          </div>
+        </section>
+      </main>
     );
   }
 }

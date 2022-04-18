@@ -1,0 +1,37 @@
+.album__page {
+  background-color: var(--main-color);
+  height: 100vh;
+}
+
+.album__container {
+  align-items: center;
+  display: flex;
+  height: calc(100vh - 94px);
+  justify-content: space-between;
+  margin: auto;
+  width: 80%;
+}
+
+.album__info img {
+  border-radius: 6px;
+  height: 400px;
+  width: 400px;
+}
+
+.album__info h2 {
+  color: var(--secondary-color);
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.album__info h3 {
+  color: var(--secondary-color);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.track__list {
+  height: 450px;
+  overflow-y: scroll;
+  padding-right: 30px;
+}

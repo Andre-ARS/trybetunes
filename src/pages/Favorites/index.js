@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Header from '../components/Header/index';
-import MusicCard from '../components/MusicCard';
-import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
-import Loading from './Loading';
+import Header from '../../components/Header/index';
+import MusicCard from '../../components/MusicCard/index';
+import { getFavoriteSongs, removeSong } from '../../services/favoriteSongsAPI';
+import Loading from '../Loading';
+import style from './style.module.css';
 
 class Favorites extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Favorites extends Component {
   handlePageSelector = () => {
     const pageSelector = document.querySelector('.style_select__page__kfR-_');
     const favorites = document.querySelectorAll('a')[1];
-    pageSelector.style.left = '145px';
+    pageSelector.style.left = '133px';
     favorites.style.color = '#16161A';
   }
 
@@ -63,17 +64,21 @@ class Favorites extends Component {
     const { state: { favSongs }, onInputChange } = this;
 
     if (favSongs) {
-      return (favSongs
-        .map(({ trackName, previewUrl, trackId }, index) => (
-          <MusicCard
-            name={ trackName }
-            id={ trackId }
-            url={ previewUrl }
-            key={ trackName }
-            event={ onInputChange }
-            index={ index }
-            favSongs={ favSongs }
-          />))
+      return (
+        <div className={ style.track_list }>
+          { favSongs
+            .map(({ trackName, previewUrl, trackId, artworkUrl100 }, index) => (
+              <MusicCard
+                name={ trackName }
+                id={ trackId }
+                url={ previewUrl }
+                key={ trackName }
+                event={ onInputChange }
+                index={ index }
+                favSongs={ favSongs }
+                img={ artworkUrl100 }
+              />))}
+        </div>
       );
     }
   }
@@ -82,10 +87,12 @@ class Favorites extends Component {
     const { loading } = this.state;
 
     return (
-      <div data-testid="page-favorites" className="fav">
-        <Header class="fav" />
+      <div data-testid="page-favorites" className={ style.fav_page }>
+        <Header />
         <h2>Músicas Favoritas:</h2>
-        { loading ? <Loading /> : this.renderTracks() }
+        <div className={ style.favorite_container }>
+          { loading ? <Loading /> : this.renderTracks() }
+        </div>
       </div>
     );
   }

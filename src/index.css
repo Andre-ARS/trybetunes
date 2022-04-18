@@ -7,6 +7,11 @@
   --tertiary-color: #242629;
 }
 
+p {
+  color: var(--secondary-color);
+  font-size: 24px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

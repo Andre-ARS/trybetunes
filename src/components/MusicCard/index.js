@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { string } from 'prop-types';
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import style from './style.module.css';
 
 class MusicCard extends Component {
   constructor(props) {
@@ -24,10 +26,17 @@ class MusicCard extends Component {
   }
 
   render() {
-    const { props: { name, id, url, event, index }, state: { isChecked } } = this;
+    const { props: {
+      name,
+      id,
+      url,
+      event,
+      index,
+      img }, state: { isChecked } } = this;
 
     return (
-      <div key={ id }>
+      <div key={ id } className={ style.card__container }>
+        { img && <img src={ img } alt="" />}
         <p>{name}</p>
         <audio data-testid="audio-component" src={ url } controls>
           <track kind="captions" />
@@ -36,7 +45,7 @@ class MusicCard extends Component {
           <code>audio</code>
           .
         </audio>
-        <label htmlFor={ id }>
+        <label htmlFor={ id } className={ style.favorite__check }>
           <input
             type="checkbox"
             id={ id }
@@ -45,7 +54,7 @@ class MusicCard extends Component {
             name={ index }
             checked={ isChecked }
           />
-          Favorita
+          { !isChecked ? <BsHeart /> : <BsHeartFill /> }
         </label>
       </div>
     );
@@ -59,6 +68,7 @@ MusicCard.propTypes = {
   event: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   favSongs: PropTypes.arrayOf(string).isRequired,
+  img: PropTypes.string.isRequired,
 };
 
 export default MusicCard;

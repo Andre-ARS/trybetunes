@@ -1,0 +1,29 @@
+.card__container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  width: 650px;
+}
+
+.card__container img {
+  height: 80px;
+  width: 80px;
+}
+
+.card__container p {
+  color: var(--secondary-color);
+  font-size: 18px;
+  text-align: center;
+  width: 200px;
+}
+
+.favorite__check {
+  color: var(--secondary-color);
+  font-size: 24px;
+}
+
+.favorite__check input {
+  position: absolute;
+  top: -999999999px;
+}

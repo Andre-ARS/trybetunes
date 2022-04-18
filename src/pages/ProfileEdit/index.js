@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Header from '../components/Header/index';
-import Loading from './Loading';
-import { getUser, updateUser } from '../services/userAPI';
+import { IoMdContact } from 'react-icons/io';
+import style from './style.module.css';
+import Header from '../../components/Header/index';
+import Loading from '../Loading';
+import { getUser, updateUser } from '../../services/userAPI';
 
 class ProfileEdit extends Component {
   constructor(props) {
@@ -38,7 +40,7 @@ class ProfileEdit extends Component {
   handlePageSelector = () => {
     const pageSelector = document.querySelector('.style_select__page__kfR-_');
     const profile = document.querySelectorAll('a')[2];
-    pageSelector.style.left = '292px';
+    pageSelector.style.left = '266.5px';
     profile.style.color = '#16161A';
   }
 
@@ -74,20 +76,23 @@ class ProfileEdit extends Component {
     } = this;
 
     return (
-      <div>
-        <form>
-          <label htmlFor="image">
+      <div className={ style.form_container }>
+        <form className={ style.form }>
+          <div className={ style.img_selector }>
+            { image ? <img src={ image } alt={ name } />
+              : <IoMdContact /> }
             <input
               type="text"
               name="image"
               id="image"
+              placeholder="Insira um link"
               data-testid="edit-input-image"
               value={ image }
               onChange={ onInputChange }
             />
-          </label>
+          </div>
           <label htmlFor="name">
-            Nome
+            <p>Nome</p>
             <input
               type="text"
               data-testid="edit-input-name"
@@ -98,7 +103,7 @@ class ProfileEdit extends Component {
             />
           </label>
           <label htmlFor="email">
-            E-mail
+            <p>E-mail</p>
             <input
               type="email"
               data-testid="edit-input-email"
@@ -109,7 +114,7 @@ class ProfileEdit extends Component {
             />
           </label>
           <label htmlFor="description">
-            Bio
+            <p>Descrição</p>
             <textarea
               cols="30"
               rows="10"
@@ -181,7 +186,7 @@ class ProfileEdit extends Component {
     const { loading } = this.state;
 
     return (
-      <div data-testid="page-profile-edit" className="profile">
+      <div data-testid="page-profile-edit" className={ style.profile_page }>
         <Header />
         {loading ? <Loading /> : this.editForm()}
       </div>
