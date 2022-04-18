@@ -55,6 +55,7 @@ class MusicCard extends Component {
             checked={ isChecked }
           />
           { !isChecked ? <BsHeart /> : <BsHeartFill /> }
+          Favorita
         </label>
       </div>
     );

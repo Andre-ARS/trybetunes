@@ -41,11 +41,11 @@ class Header extends Component {
           <Link data-testid="link-to-favorites" to="/favorites">Favorites</Link>
           <Link data-testid="link-to-profile" to="/profile">Profile</Link>
         </nav>
-        <div className={ style.select__page }>
+        {/* <div className={ style.select__page }>
           <div className={ style.left__square } />
           <div className={ style.page__change } />
           <div className={ style.right__square } />
-        </div>
+        </div> */}
         {
           userName
             ? (
