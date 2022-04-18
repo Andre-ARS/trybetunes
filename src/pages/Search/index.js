@@ -24,21 +24,21 @@ class Search extends Component {
     this.albumRender = this.albumRender.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.handlePageSelector();
-  // }
+  componentDidMount() {
+    this.handlePageSelector();
+  }
 
-  // componentWillUnmount() {
-  //   const search = document.querySelectorAll('a')[0];
-  //   search.style.color = '#fffffe';
-  // }
+  componentWillUnmount() {
+    const search = document.querySelectorAll('a')[0];
+    search.style.color = '#fffffe';
+  }
 
-  // handlePageSelector = () => {
-  //   const pageSelector = document.querySelector('.style_select__page__kfR-_');
-  //   const search = document.querySelectorAll('a')[0];
-  //   pageSelector.style.left = '0';
-  //   search.style.color = '#16161A';
-  // }
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const search = document.querySelectorAll('a')[0];
+    pageSelector.style.left = '0';
+    search.style.color = '#16161A';
+  }
 
   onInputChange({ target }) {
     const { name, value } = target;

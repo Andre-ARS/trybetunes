@@ -19,20 +19,20 @@ class Profile extends Component {
 
   componentDidMount() {
     this.fetchUser();
-    // this.handlePageSelector();
+    this.handlePageSelector();
   }
 
-  // componentWillUnmount() {
-  //   const profile = document.querySelectorAll('a')[2];
-  //   profile.style.color = '#fffffe';
-  // }
+  componentWillUnmount() {
+    const profile = document.querySelectorAll('a')[2];
+    profile.style.color = '#fffffe';
+  }
 
-  // handlePageSelector = () => {
-  //   const pageSelector = document.querySelector('.style_select__page__kfR-_');
-  //   const profile = document.querySelectorAll('a')[2];
-  //   pageSelector.style.left = '266.5px';
-  //   profile.style.color = '#16161A';
-  // }
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const profile = document.querySelectorAll('a')[2];
+    pageSelector.style.left = '266.5px';
+    profile.style.color = '#16161A';
+  }
 
   fetchUser() {
     this.setState({ loading: true }, async () => {

@@ -20,20 +20,20 @@ class Favorites extends Component {
 
   componentDidMount() {
     this.fetchFavorites();
-    // this.handlePageSelector();
+    this.handlePageSelector();
   }
 
-  // componentWillUnmount() {
-  //   const favorites = document.querySelectorAll('a')[1];
-  //   favorites.style.color = '#fffffe';
-  // }
+  componentWillUnmount() {
+    const favorites = document.querySelectorAll('a')[1];
+    favorites.style.color = '#fffffe';
+  }
 
-  // handlePageSelector = () => {
-  //   const pageSelector = document.querySelector('.style_select__page__kfR-_');
-  //   const favorites = document.querySelectorAll('a')[1];
-  //   pageSelector.style.left = '133px';
-  //   favorites.style.color = '#16161A';
-  // }
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const favorites = document.querySelectorAll('a')[1];
+    pageSelector.style.left = '133px';
+    favorites.style.color = '#16161A';
+  }
 
   onInputChange({ target }) {
     const { name } = target;

@@ -25,21 +25,21 @@ class Album extends Component {
   componentDidMount() {
     this.musicFetch();
     this.fetchFav();
-    // this.handlePageSelector();
+    this.handlePageSelector();
   }
 
-  // componentWillUnmount() {
-  //   const search = document.querySelectorAll('a')[0];
-  //   search.style.color = '#fffffe';
-  //   console.log(search);
-  // }
+  componentWillUnmount() {
+    const search = document.querySelectorAll('a')[0];
+    search.style.color = '#fffffe';
+    console.log(search);
+  }
 
-  // handlePageSelector = () => {
-  //   const pageSelector = document.querySelector('.style_select__page__kfR-_');
-  //   const search = document.querySelectorAll('a')[0];
-  //   pageSelector.style.left = '0';
-  //   search.style.color = '#16161A';
-  // }
+  handlePageSelector = () => {
+    const pageSelector = document.querySelector('.style_select__page__kfR-_');
+    const search = document.querySelectorAll('a')[0];
+    pageSelector.style.left = '0';
+    search.style.color = '#16161A';
+  }
 
   onInputChange({ target }) {
     const { name, checked } = target;
