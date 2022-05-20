@@ -56,8 +56,13 @@
   width: 144px;
 }
 
+.album__warapper:hover {
+  background-color: rgb(72, 70, 70);
+}
+
 .album__warapper img {
   border-radius: 5px;
+  box-shadow: rgb(22, 22, 22) 3px 2px 16px;
   height: 110px;
   margin-bottom: 18px;
   width: 114px;

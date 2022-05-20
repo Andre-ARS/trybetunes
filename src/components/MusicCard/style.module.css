@@ -7,8 +7,9 @@
 }
 
 .card__container img {
-  height: 80px;
-  width: 80px;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
 }
 
 .card__container p {

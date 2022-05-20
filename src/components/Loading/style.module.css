@@ -1,0 +1,7 @@
+.loading {
+  align-items: center;
+  color: var(--secondary-color);
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+}

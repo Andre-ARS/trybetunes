@@ -70,3 +70,12 @@ img {
   top: 50%;
 }
 
+.loading {
+  align-items: center;
+  background-color: var(--main-color);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+

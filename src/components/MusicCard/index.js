@@ -12,6 +12,10 @@ class MusicCard extends Component {
   }
 
   componentDidMount() {
+    this.getFav();
+  }
+
+  getFav = () => {
     const { favSongs, id } = this.props;
     const songs = favSongs;
     if (songs.some(({ trackId }) => trackId === id)) {
@@ -29,7 +33,6 @@ class MusicCard extends Component {
     const { props: {
       name,
       id,
-      url,
       event,
       index,
       img }, state: { isChecked } } = this;
@@ -38,13 +41,6 @@ class MusicCard extends Component {
       <div key={ id } className={ style.card__container }>
         { img && <img src={ img } alt="" />}
         <p>{name}</p>
-        <audio data-testid="audio-component" src={ url } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {'  '}
-          <code>audio</code>
-          .
-        </audio>
         <label htmlFor={ id } className={ style.favorite__check }>
           <input
             type="checkbox"
@@ -63,8 +59,7 @@ class MusicCard extends Component {
 
 MusicCard.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   event: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   favSongs: PropTypes.arrayOf(string).isRequired,

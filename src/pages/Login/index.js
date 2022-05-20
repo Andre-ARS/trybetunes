@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { createUser } from '../../services/userAPI';
-import Loading from '../Loading';
+import Loading from '../../components/Loading/index';
 import styles from './style.module.css';
 import playerDraw from '../../images/audio__player.svg';
 
@@ -50,8 +50,13 @@ class Login extends Component {
       loading,
       status }, onInputChange, addUser } = this;
 
-    if (loading) return <Loading status={ status } redirect="/search" />;
-
+    if (loading) {
+      return (
+        <div className={ styles.loading }>
+          <Loading status={ status } redirect="/search" />
+        </div>
+      );
+    }
     return (
       <div data-testid="page-login" className={ styles.container }>
         <img src={ playerDraw } alt="" />

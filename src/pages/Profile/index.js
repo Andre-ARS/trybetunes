@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoMdContact } from 'react-icons/io';
 import Header from '../../components/Header/index';
 import { getUser } from '../../services/userAPI';
-import Loading from '../Loading';
+import Loading from '../../components/Loading/index';
 import style from './style.module.css';
 
 class Profile extends Component {

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { IoMdContact } from 'react-icons/io';
 import style from './style.module.css';
 import Header from '../../components/Header/index';
-import Loading from '../Loading';
+import Loading from '../../components/Loading/index';
 import { getUser, updateUser } from '../../services/userAPI';
 
 class ProfileEdit extends Component {

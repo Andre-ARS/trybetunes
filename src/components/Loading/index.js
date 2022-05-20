@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import style from './style.module.css';
 
 class Loading extends Component {
   render() {
     const { status, redirect } = this.props;
     return (
-      status ? <Redirect to={ redirect } /> : <p>Carregando...</p>
+      <div className={ style.loading }>
+        { status ? <Redirect to={ redirect } /> : <p>Carregando...</p> }
+      </div>
     );
   }
 }

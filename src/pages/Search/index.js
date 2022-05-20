@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Header from '../../components/Header/index';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
-import Loading from '../Loading';
+import Loading from '../../components/Loading/index';
 import style from './style.module.css';
 
 const ALBUM_LIMIT = 17;

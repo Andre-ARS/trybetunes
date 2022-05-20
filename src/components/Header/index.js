@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdContact } from 'react-icons/io';
-import Loading from '../../pages/Loading';
+import Loading from '../Loading/index';
 import { getUser } from '../../services/userAPI';
 // import logo from '../../images/Logo_TrybeTunes.png';
 import style from './style.module.css';

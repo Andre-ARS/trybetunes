@@ -8,6 +8,7 @@
   margin-bottom: 30px;
   padding: 0 20px 0 7px;
   width: 100%;
+  z-index: 5;
 }
 
 .header__user {
@@ -46,7 +47,7 @@
 }
 
 .header__navigation {
-  background-color: rgb(39, 38, 38);
+  background-color: var(--tertiary-color);
   display: flex;
   justify-content: space-evenly;
   position: relative;
@@ -67,7 +68,7 @@
   display: flex;
   left: 0; /* search: left 0; favorites: left 145px; profile: left 292; */
   position: absolute;
-  top: 6.5px;
+  top: 6.9px;
   z-index: 1;
 }
 

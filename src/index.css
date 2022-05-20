@@ -5,12 +5,14 @@
   --secondary-color: #fffffe;
   --accent: #2CB67D;
   --tertiary-color: #242629;
+  --ligth-grey: #8D8D8D;
+
 }
 
-p {
+/* p {
   color: var(--secondary-color);
   font-size: 24px;
-}
+} */
 
 * {
   box-sizing: border-box;
