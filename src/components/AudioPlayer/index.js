@@ -6,6 +6,10 @@ import {
   BsHeartFill,
   BsFillSkipEndFill,
   BsFillSkipStartFill,
+  BsFillVolumeUpFill,
+  BsFillVolumeOffFill,
+  BsFillVolumeDownFill,
+  BsFillVolumeMuteFill,
 } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import style from './style.module.css';
@@ -21,6 +25,8 @@ export default class AudioPlayer extends Component {
       play: true,
       progress: 0,
       currentTime: CURRENT_TIME,
+      volume: 60,
+      muted: false,
     };
   }
 
@@ -32,22 +38,17 @@ export default class AudioPlayer extends Component {
     });
   };
 
-  setDuration = (duration) => {
-    console.log(duration);
-  };
-
   playMusic = () => {
     const player = document.querySelector('#aud');
     this.setState(({ play }) => ({ play: !play }));
-    const { play } = this.state;
+    const { play, volume } = this.state;
     const controls = play ? player.play() : player.pause();
-    this.setDuration(Math.floor(player.duration));
+    player.volume = volume / 100;
 
     return controls;
   };
 
   getTime = (sec) => {
-    console.log(sec);
     const minutes = Math.floor(sec / ONE_MINUTE);
     const seconds = Math.floor(sec % ONE_MINUTE);
     const checkSeconds = seconds < MIN_SECS ? `0${seconds}` : seconds;
@@ -55,12 +56,20 @@ export default class AudioPlayer extends Component {
     return `${minutes}:${checkSeconds}`;
   };
 
+  getICon = () => {
+    const MIN_VOL_UP = 60;
+    const { volume, muted } = this.state;
+    if (muted) return <BsFillVolumeMuteFill />;
+    if (volume === '0') return <BsFillVolumeOffFill />;
+    if (volume < MIN_VOL_UP) return <BsFillVolumeDownFill />;
+    return <BsFillVolumeUpFill />;
+  };
+
   switchMusic = (callBack) => {
     const player = document.querySelector('#aud');
 
     callBack(player);
     this.setState({ play: false });
-    this.setDuration(Math.floor(player.duration));
   };
 
   progressUpdate = ({ target }) => {
@@ -70,16 +79,29 @@ export default class AudioPlayer extends Component {
       progress: (currentTime / duration) * 100,
       currentTime: this.getTime(currentTime),
     });
-  }
+  };
+
+  volumeChange = ({ target: { value } }) => {
+    const { muted } = this.state;
+    const player = document.querySelector('#aud');
+
+    if (!muted) {
+      this.setState({ volume: value }, () => {
+        player.volume = value / 100;
+      });
+    }
+  };
 
   render() {
     const {
-      state: { play, progress, currentTime },
+      state: { play, progress, currentTime, volume, muted },
       props: { trackList, isChecked, track, event, nextSong, prevSong },
       timeChange,
       playMusic,
       switchMusic,
       progressUpdate,
+      getICon,
+      volumeChange,
     } = this;
 
     return (
@@ -151,7 +173,7 @@ export default class AudioPlayer extends Component {
             </button>
           </div>
           <div className={ style.progress }>
-            <p className={ style.current_time }>{ currentTime }</p>
+            <p className={ style.current_time }>{currentTime}</p>
             <div className={ style.progress_bar }>
               <input
                 type="range"
@@ -165,6 +187,26 @@ export default class AudioPlayer extends Component {
             <p className={ style.total_time }>0:29</p>
           </div>
         </section>
+        <div className={ style.volume_controls }>
+          <button
+            type="button"
+            onClick={ () => this.setState({ muted: !muted }) }
+            className={ style.volume_btn }
+          >
+            {getICon()}
+          </button>
+          <div className={ style.volume_bar }>
+            <div
+              className={ style.thumb }
+              style={ { width: `${muted ? '0' : volume}%` } }
+            />
+            <input
+              type="range"
+              onInput={ volumeChange }
+              value={ muted ? '0' : volume }
+            />
+          </div>
+        </div>
       </div>
     );
   }

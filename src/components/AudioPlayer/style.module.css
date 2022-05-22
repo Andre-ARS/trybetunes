@@ -112,3 +112,24 @@
   position: relative;
   width: 85%;
 }
+
+.volume_controls {
+  align-items: center;
+  display: flex;
+  margin-right: 20px;
+}
+
+.volume_bar {
+  display: flex;
+  position: relative;
+}
+
+.volume_btn {
+  background-color: rgba(123, 43, 43, 0);
+  border: none;
+  color: var(--secondary-color);
+  font-size: 24px;
+  height: 24px;
+  margin-right: 4px;
+  padding: 0;
+}
