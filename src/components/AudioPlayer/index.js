@@ -81,10 +81,19 @@ export default class AudioPlayer extends Component {
     });
   };
 
+  setMute = () => {
+    const player = document.querySelector('#aud');
+    const { muted } = this.state;
+
+    player.muted = !muted;
+    this.setState({ muted: !muted });
+  }
+
   volumeChange = ({ target: { value } }) => {
     const { muted } = this.state;
     const player = document.querySelector('#aud');
 
+    player.muted = muted;
     if (!muted) {
       this.setState({ volume: value }, () => {
         player.volume = value / 100;
@@ -102,6 +111,7 @@ export default class AudioPlayer extends Component {
       progressUpdate,
       getICon,
       volumeChange,
+      setMute,
     } = this;
 
     return (
@@ -190,7 +200,7 @@ export default class AudioPlayer extends Component {
         <div className={ style.volume_controls }>
           <button
             type="button"
-            onClick={ () => this.setState({ muted: !muted }) }
+            onClick={ setMute }
             className={ style.volume_btn }
           >
             {getICon()}
