@@ -21,6 +21,7 @@ class Album extends Component {
       favSongs: JSON.parse(localStorage.getItem('favorite_songs')) || [],
       isChecked: false,
       track: 1,
+      play: true,
     };
 
     this.musicFetch = this.musicFetch.bind(this);
@@ -63,6 +64,14 @@ class Album extends Component {
         isChecked: !isChecked,
       });
     });
+  }
+
+  setPlay = (bool) => {
+    if (bool !== undefined) {
+      this.setState({ play: bool });
+    } else {
+      this.setState(({ play }) => ({ play: !play }));
+    }
   }
 
   getFavorite = () => {
@@ -114,6 +123,12 @@ class Album extends Component {
     }
   }
 
+  selectMusic = (i) => {
+    const player = document.querySelector('#aud');
+
+    this.setState({ track: i, play: false }, () => player.play());
+  }
+
   async fetchFav() {
     const favs = await getFavoriteSongs();
     return favs;
@@ -155,6 +170,7 @@ class Album extends Component {
             event={ onInputChange }
             index={ index }
             favSongs={ favSongs }
+            selectMusic={ this.selectMusic }
           />
         ),
       );
@@ -172,11 +188,13 @@ class Album extends Component {
         favSongs,
         isChecked,
         track,
+        play,
       },
       getFavorite,
       onInputChange,
       nextSong,
       prevSong,
+      setPlay,
     } = this;
 
     return (
@@ -202,6 +220,8 @@ class Album extends Component {
             event={ onInputChange }
             nextSong={ nextSong }
             prevSong={ prevSong }
+            play={ play }
+            setPlay={ setPlay }
           />
         )}
       </main>

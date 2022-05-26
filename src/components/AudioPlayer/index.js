@@ -18,11 +18,12 @@ import './style.scss';
 const ONE_MINUTE = 60;
 const MIN_SECS = 10;
 const CURRENT_TIME = '0:00';
+const TITLE_LENGTH = 16;
+const NAME_LENGTH = 15;
 export default class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      play: true,
       progress: 0,
       currentTime: CURRENT_TIME,
       volume: 60,
@@ -33,18 +34,17 @@ export default class AudioPlayer extends Component {
   timeChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value }, () => {
       const player = document.querySelector('#aud');
-
       player.currentTime = (player.duration * value) / 100;
     });
   };
 
   playMusic = () => {
     const player = document.querySelector('#aud');
-    this.setState(({ play }) => ({ play: !play }));
-    const { play, volume } = this.state;
+    const { setPlay } = this.props;
+    setPlay();
+    const { props: { play }, state: { volume } } = this;
     const controls = play ? player.play() : player.pause();
     player.volume = volume / 100;
-
     return controls;
   };
 
@@ -52,7 +52,6 @@ export default class AudioPlayer extends Component {
     const minutes = Math.floor(sec / ONE_MINUTE);
     const seconds = Math.floor(sec % ONE_MINUTE);
     const checkSeconds = seconds < MIN_SECS ? `0${seconds}` : seconds;
-
     return `${minutes}:${checkSeconds}`;
   };
 
@@ -65,11 +64,16 @@ export default class AudioPlayer extends Component {
     return <BsFillVolumeUpFill />;
   };
 
-  switchMusic = (callBack) => {
+  switchMusic = (callBack, type) => {
+    const TWO_SEC = 10;
+    const { props: { setPlay }, state: { progress } } = this;
     const player = document.querySelector('#aud');
-
-    callBack(player);
-    this.setState({ play: false });
+    if (type === 'prev' && progress > TWO_SEC) {
+      player.currentTime = 0;
+    } else {
+      callBack(player);
+      setPlay(false);
+    }
   };
 
   progressUpdate = ({ target }) => {
@@ -84,15 +88,13 @@ export default class AudioPlayer extends Component {
   setMute = () => {
     const player = document.querySelector('#aud');
     const { muted } = this.state;
-
     player.muted = !muted;
     this.setState({ muted: !muted });
-  }
+  };
 
   volumeChange = ({ target: { value } }) => {
     const { muted } = this.state;
     const player = document.querySelector('#aud');
-
     player.muted = muted;
     if (!muted) {
       this.setState({ volume: value }, () => {
@@ -101,10 +103,29 @@ export default class AudioPlayer extends Component {
     }
   };
 
+  formatTitle = (title) => {
+    const MAX_LENGTH = 13;
+    const NEG_ONE = -1;
+    const index = title.indexOf('(');
+    const noFeat = title.slice(0, index);
+    const result = index !== NEG_ONE ? noFeat : title;
+
+    return result.length > TITLE_LENGTH
+      ? result.slice(0, MAX_LENGTH).concat('...')
+      : result;
+  };
+
+  formatName = (name) => {
+    const MAX_LENGTH = 12;
+    return name.length > NAME_LENGTH
+      ? name.slice(0, MAX_LENGTH).concat('...')
+      : name;
+  };
+
   render() {
     const {
-      state: { play, progress, currentTime, volume, muted },
-      props: { trackList, isChecked, track, event, nextSong, prevSong },
+      state: { progress, currentTime, volume, muted },
+      props: { trackList, isChecked, track, event, nextSong, prevSong, play },
       timeChange,
       playMusic,
       switchMusic,
@@ -112,6 +133,8 @@ export default class AudioPlayer extends Component {
       getICon,
       volumeChange,
       setMute,
+      formatTitle,
+      formatName,
     } = this;
 
     return (
@@ -124,9 +147,13 @@ export default class AudioPlayer extends Component {
                 alt=""
                 className={ style.album_img }
               />
-              <div>
-                <p className={ style.track }>{trackList[track].trackName}</p>
-                <p className={ style.artist }>{trackList[track].artistName}</p>
+              <div className={ style.names }>
+                <p className={ style.track } title={ trackList[track].trackName }>
+                  {formatTitle(trackList[track].trackName)}
+                </p>
+                <p className={ style.artist } title={ trackList[track].artistName }>
+                  {formatName(trackList[track].artistName)}
+                </p>
               </div>
               <label htmlFor="fav" className={ style.favorite__check }>
                 <input
@@ -162,7 +189,7 @@ export default class AudioPlayer extends Component {
             <button
               type="button"
               className={ style.controls }
-              onClick={ () => switchMusic(prevSong) }
+              onClick={ () => switchMusic(prevSong, 'prev') }
             >
               <BsFillSkipStartFill />
             </button>
@@ -198,11 +225,7 @@ export default class AudioPlayer extends Component {
           </div>
         </section>
         <div className={ style.volume_controls }>
-          <button
-            type="button"
-            onClick={ setMute }
-            className={ style.volume_btn }
-          >
+          <button type="button" onClick={ setMute } className={ style.volume_btn }>
             {getICon()}
           </button>
           <div className={ style.volume_bar }>

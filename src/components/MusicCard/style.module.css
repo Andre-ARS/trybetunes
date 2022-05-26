@@ -1,9 +1,9 @@
 .card__container {
   align-items: center;
   display: flex;
+  height: 60px;
   justify-content: space-between;
-  margin-bottom: 30px;
-  width: 650px;
+  width: 100%;
 }
 
 .card__container img {
@@ -17,6 +17,24 @@
   font-size: 18px;
   text-align: center;
   width: 200px;
+}
+
+.play {
+  align-items: center;
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+  color: var(--ligth-grey);
+  display: flex;
+  font-size: 32px;
+  height: 40px;
+  justify-content: center;
+  transition: font 180ms ease-in-out;
+  width: 40px;
+}
+
+.play:hover {
+  color: var(--secondary-color);
+  font-size: 50px;
 }
 
 .favorite__check {

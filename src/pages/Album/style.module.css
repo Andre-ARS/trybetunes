@@ -31,7 +31,15 @@
 }
 
 .track__list {
+  display: flex;
+  flex-direction: column;
   height: 450px;
+  justify-content: center;
   overflow-y: scroll;
   padding-right: 30px;
+  width: 462px;
+}
+
+.track__list:nth-child( 1 ) {
+  width: 100%;
 }
