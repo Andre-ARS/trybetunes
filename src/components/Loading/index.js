@@ -7,9 +7,9 @@ class Loading extends Component {
   render() {
     const { status, redirect } = this.props;
     return (
-      <div className={ style.loading }>
+      <section className={ style.loading }>
         { status ? <Redirect to={ redirect } /> : <p>Carregando...</p> }
-      </div>
+      </section>
     );
   }
 }

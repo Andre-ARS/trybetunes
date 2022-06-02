@@ -1,14 +1,22 @@
 .card__container {
   align-items: center;
+  border-radius: 8px;
   display: flex;
-  height: 60px;
+  height: 80px;
   justify-content: space-between;
+  padding-right: 10px;
+  transition: background 150ms ease-out;
   width: 100%;
+}
+
+.card__container:hover {
+  background-color: #1f1f24;
 }
 
 .card__container img {
   border-radius: 50%;
   height: 70px;
+  margin-left: 10px;
   width: 70px;
 }
 
@@ -40,9 +48,14 @@
 .favorite__check {
   color: var(--secondary-color);
   font-size: 24px;
+  height: 24px;
 }
 
 .favorite__check input {
   position: absolute;
   top: -999999999px;
+}
+
+.card__container:nth-child( var(--i) ) {
+  background-color: red;
 }

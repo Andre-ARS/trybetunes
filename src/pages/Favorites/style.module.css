@@ -7,7 +7,7 @@
 .favorite_container {
   align-items: center;
   display: flex;
-  height: 70%;
+  height: calc(100vh - 257px);
   justify-content: center;
   width: 100%;
 }
@@ -16,4 +16,23 @@
   color: var(--secondary-color);
   font-size: 24px;
   margin: 45px;
+}
+
+.favorite__tracks {
+  height: 500px;
+  overflow-y: scroll;
+  padding-right: 30px;
+  width: 40%;
+}
+
+.favorite__tracks section {
+  height: 100%;
+}
+
+.favorite__tracks p {
+  width: 60%;
+}
+
+.favorite__tracks div {
+  height: 90px;
 }

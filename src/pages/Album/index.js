@@ -15,7 +15,6 @@ import style from './style.module.css';
 class Album extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       artistName: '',
       favSongs: JSON.parse(localStorage.getItem('favorite_songs')) || [],
@@ -125,8 +124,17 @@ class Album extends Component {
 
   selectMusic = (i) => {
     const player = document.querySelector('#aud');
+    this.setState({ track: i, play: false }, () => {
+      player.play();
+      this.getFavorite();
+    });
+  }
 
-    this.setState({ track: i, play: false }, () => player.play());
+  charCheck = (name) => {
+    const limit = 25;
+    const three = 3;
+    if (name && name.length > limit) return name.slice(0, limit - three).concat('...');
+    return name;
   }
 
   async fetchFav() {
@@ -155,7 +163,7 @@ class Album extends Component {
 
   renderTracks() {
     const {
-      state: { trackList, favSongs },
+      state: { trackList, favSongs, track },
       onInputChange,
     } = this;
 
@@ -171,6 +179,7 @@ class Album extends Component {
             index={ index }
             favSongs={ favSongs }
             selectMusic={ this.selectMusic }
+            track={ track }
           />
         ),
       );
@@ -195,7 +204,7 @@ class Album extends Component {
       nextSong,
       prevSong,
       setPlay,
-    } = this;
+      charCheck } = this;
 
     return (
       <main data-testid="page-album" className={ style.album__page }>
@@ -203,7 +212,7 @@ class Album extends Component {
         <section className={ style.album__container }>
           <div className={ style.album__info }>
             <img src={ album } alt={ albumName } />
-            <h2 data-testid="album-name">{albumName}</h2>
+            <h2 data-testid="album-name" title={ albumName }>{charCheck(albumName)}</h2>
             <h3 data-testid="artist-name">{artistName}</h3>
           </div>
           <div className={ style.track__list }>

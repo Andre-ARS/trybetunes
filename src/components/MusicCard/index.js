@@ -15,6 +15,16 @@ class MusicCard extends Component {
     this.getFav();
   }
 
+  charCheck = (name) => {
+    const LIMIT = 30;
+    const THREE = 3;
+
+    if (name && name.length > LIMIT) {
+      return name.slice(0, LIMIT - THREE).concat('...');
+    }
+    return name;
+  };
+
   getFav = () => {
     const { favSongs, id } = this.props;
     const songs = favSongs;
@@ -31,12 +41,19 @@ class MusicCard extends Component {
 
   render() {
     const {
-      props: { name, id, event, index, img, selectMusic },
+      props: { name, id, event, index, img, selectMusic, track },
       state: { isChecked },
+      charCheck,
     } = this;
+    const textColor = track === index ? '#2CB67D' : '';
+    const back = track === index ? '#222225' : '';
 
     return (
-      <div key={ id } className={ style.card__container }>
+      <div
+        key={ id }
+        style={ { backgroundColor: back } }
+        className={ style.card__container }
+      >
         {img && <img src={ img } alt="" />}
         <button
           type="button"
@@ -45,7 +62,9 @@ class MusicCard extends Component {
         >
           <BsPlayFill />
         </button>
-        <p>{name}</p>
+        <p title={ name } style={ { color: textColor } }>
+          {charCheck(name)}
+        </p>
         <label htmlFor={ id } className={ style.favorite__check }>
           <input
             type="checkbox"
@@ -70,6 +89,7 @@ MusicCard.propTypes = {
   favSongs: PropTypes.arrayOf(string).isRequired,
   img: PropTypes.string.isRequired,
   selectMusic: PropTypes.func.isRequired,
+  track: PropTypes.number.isRequired,
 };
 
 export default MusicCard;

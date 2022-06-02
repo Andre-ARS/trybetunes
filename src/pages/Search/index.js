@@ -49,7 +49,8 @@ class Search extends Component {
     });
   }
 
-  fetchArtist() {
+  fetchArtist(e) {
+    e.preventDefault();
     const { arstistName } = this.state;
     this.setState({ loading: true, artist: arstistName }, async () => {
       const albumList = await searchAlbumsAPI(arstistName);
@@ -125,7 +126,7 @@ class Search extends Component {
           />
           <button
             disabled={ disable }
-            type="button"
+            type="submit"
             data-testid="search-artist-button"
             onClick={ fetchArtist }
           >
