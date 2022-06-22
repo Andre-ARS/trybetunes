@@ -1,19 +1,14 @@
 # Projeto Trybetunes
 
-![1655860734657](https://file+.vscode-resource.vscode-cdn.net/home/andre/Trybe/Projetos/frontEnd/sd-019-c-project-trybetunes/image/README/1655860734657.png)
+![1655863990102](image/README/1655863990102.png)![1655863990102](image/README/1655863990102.png)
 
 # Contexto
 
 Este projeto é um aplicativo de músicas, feito no módulo de Front-end no curso da Trybe, em que podemos pesquisar pelos albuns de um artista, ouvir suas músicas, e favoritá-las.
 
-
-
 ![1655863791145](image/README/1655863791145.png)
 
-
-
 ![1655863752343](image/README/1655863752343.png)
-
 
 ![1655863791145](image/README/1655863791145.png)
 
@@ -45,14 +40,8 @@ cd trybetunes
 npm install
 ```
 
-## Executando aplicação
+### Executando aplicaçãPara rodar o front-end:
 
-* Para rodar o front-end:
-
-  ```
+* ```
   npm start
   ```
-
-## Link da Aplicação
-
-    [trybetunes](https://andre-trybetunes.vercel.app/)
