@@ -40,8 +40,10 @@ cd trybetunes
 npm install
 ```
 
-### Executando aplicaçãPara rodar o front-end:
+### Executando aplicação
 
-* ```
+Para rodar o front-end:
+
+- ```
   npm start
   ```
