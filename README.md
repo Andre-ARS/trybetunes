@@ -1,11 +1,6 @@
 # Projeto Trybetunes
 
-
-
 ![1655860734657](https://file+.vscode-resource.vscode-cdn.net/home/andre/Trybe/Projetos/frontEnd/sd-019-c-project-trybetunes/image/README/1655860734657.png)
-
-
-
 
 # Contexto
 
@@ -13,40 +8,24 @@ Este projeto é um aplicativo de músicas, feito no módulo de Front-end no curs
 
 
 
-
-
-![1655860806377](https://file+.vscode-resource.vscode-cdn.net/home/andre/Trybe/Projetos/frontEnd/sd-019-c-project-trybetunes/image/README/1655860806377.png)
-
+![1655863791145](image/README/1655863791145.png)
 
 
 
+![1655863752343](image/README/1655863752343.png)
 
 
-![1655861334771](https://file+.vscode-resource.vscode-cdn.net/home/andre/Trybe/Projetos/frontEnd/sd-019-c-project-trybetunes/image/README/1655861334771.png)
-
-
-
-
+![1655863791145](image/README/1655863791145.png)
 
 Ele foi feito usando react com componentes de classe, e usa a api do itunes para pegar as musicas, o meu maior desafio (e orgulho) foi fazer o player de audio customizado.
 
-
-
-
-
 ![1655862151972](image/README/1655862151972.png)
-
-
 
 Eu fiz a estilização usando o Spotify como inpiração, e fiz um prototipo no Figma.
 
-
-
 ![1655862572745](image/README/1655862572745.png)
 
-
 ![1655862631128](image/README/1655862631128.png)
-
 
 ![1655862653760](image/README/1655862653760.png)
 
@@ -76,4 +55,4 @@ npm install
 
 ## Link da Aplicação
 
-    [andre-trybetunes.vercel.app](https://andre-trybetunes.vercel.app/)
+    [trybetunes](https://andre-trybetunes.vercel.app/)
